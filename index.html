@@ -1,87 +1,450 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>S svømmeklubb</title>
-  <style>
-    body {
-      font-family: system-ui, sans-serif;
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 2rem 1rem;
-      line-height: 1.6;
-      color: #1a1a1a;
-    }
-    h1 {
-      color: #0b5394;
-    }
-    h2 {
-      border-bottom: 2px solid #0b5394;
-      padding-bottom: 0.3rem;
-      margin-top: 2rem;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-    }
-    th, td {
-      text-align: left;
-      padding: 0.5rem;
-      border-bottom: 1px solid #ddd;
-    }
-    th {
-      background: #f0f4f8;
-    }
-    footer {
-      margin-top: 3rem;
-      font-size: 0.9rem;
-      color: #555;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skedsmo svømmeklubb</title>
+<meta name="description" content="Svømmeopplæring og konkurransesvømming for barn og ungdom i Lillestrøm kommune.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue-900: #0a3d62;
+    --blue-700: #0b5394;
+    --blue-500: #1a73c1;
+    --aqua-400: #2ec4d6;
+    --aqua-100: #e6fbfd;
+    --ink: #1a2733;
+    --ink-soft: #4a5a68;
+    --paper: #ffffff;
+    --bg: #f5f9fb;
+    --border: #e1ecf1;
+    --radius: 14px;
+    --shadow: 0 8px 24px rgba(10, 61, 98, 0.08);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+  }
+  h1, h2, h3 {
+    font-family: 'Poppins', 'Inter', sans-serif;
+    line-height: 1.25;
+    margin: 0 0 0.6em;
+  }
+  a { color: var(--blue-700); }
+  .wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* Header / nav */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 1.5rem;
+    max-width: 1040px;
+    margin: 0 auto;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--blue-900);
+    text-decoration: none;
+  }
+  .brand-mark {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--aqua-400), var(--blue-700));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1rem;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.6rem;
+    margin: 0;
+    padding: 0;
+  }
+  nav a {
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+  nav a:hover { color: var(--blue-700); }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(160deg, var(--blue-900), var(--blue-700) 60%, var(--aqua-400));
+    color: white;
+    padding: 4.5rem 0 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 70px;
+    background: var(--bg);
+    clip-path: polygon(0 100%, 100% 100%, 100% 40%, 0 100%);
+  }
+  .hero .wrap { position: relative; z-index: 1; }
+  .eyebrow {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 0.3rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    margin-bottom: 1.2rem;
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 4.5vw, 2.9rem);
+    max-width: 640px;
+  }
+  .hero p {
+    max-width: 560px;
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.9);
+  }
+  .cta-row {
+    display: flex;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+    margin-top: 1.8rem;
+  }
+  .btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  .btn-primary {
+    background: white;
+    color: var(--blue-900);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.5);
+  }
+
+  /* Sections */
+  section {
+    padding: 4rem 0;
+  }
+  .section-head {
+    max-width: 620px;
+    margin: 0 auto 2.5rem;
+    text-align: center;
+  }
+  .section-head h2 {
+    font-size: 1.8rem;
+    color: var(--blue-900);
+  }
+  .section-head p { color: var(--ink-soft); }
+
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.8rem;
+  }
+
+  /* Om klubben */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-left: 2px solid var(--aqua-400);
+  }
+  .timeline li {
+    padding: 0 0 1.4rem 1.4rem;
+    position: relative;
+  }
+  .timeline li::before {
+    content: "";
+    position: absolute;
+    left: -7px;
+    top: 4px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--blue-700);
+  }
+  .timeline .year {
+    font-weight: 700;
+    color: var(--blue-700);
+    display: block;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  /* Steder */
+  .place-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 1rem;
+  }
+  .place-card {
+    background: var(--aqua-100);
+    border-radius: var(--radius);
+    padding: 1.2rem;
+    text-align: center;
+  }
+  .place-card .icon { font-size: 1.6rem; }
+  .place-card strong { display: block; margin-top: 0.4rem; color: var(--blue-900); }
+
+  /* Tabell */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.75rem 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  th {
+    color: var(--blue-900);
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+  }
+  .note {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    margin-top: 1rem;
+  }
+
+  /* Praktisk info */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+  }
+  .info-grid .card h3 {
+    font-size: 1.05rem;
+    color: var(--blue-900);
+  }
+
+  /* Kontakt */
+  .contact {
+    background: var(--blue-900);
+    color: white;
+    border-radius: var(--radius);
+    padding: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .contact h2 { color: white; }
+  .contact p { color: rgba(255,255,255,0.85); }
+  .social-row { display: flex; gap: 0.8rem; }
+  .social-row a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+  }
+  .social-row a:hover { background: rgba(255,255,255,0.25); }
+
+  footer {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 720px) {
+    nav ul { display: none; }
+    .about-grid { grid-template-columns: 1fr; }
+    .contact { flex-direction: column; align-items: flex-start; }
+  }
+</style>
 </head>
 <body>
-  <h1>S svømmeklubb</h1>
-  <p>Velkommen til klubbens nettside. Her finner du treningstider og praktisk informasjon.</p>
 
-  <h2>Treningstider</h2>
-  <table>
-    <tr>
-      <th>Gruppe</th>
-      <th>Dag</th>
-      <th>Tid</th>
-    </tr>
-    <tr>
-      <td>Nybegynnere</td>
-      <td>Mandag</td>
-      <td>17:00 – 18:00</td>
-    </tr>
-    <tr>
-      <td>Videregående</td>
-      <td>Onsdag</td>
-      <td>18:00 – 19:00</td>
-    </tr>
-    <tr>
-      <td>Konkurranse</td>
-      <td>Tirsdag og torsdag</td>
-      <td>19:00 – 20:00</td>
-    </tr>
-  </table>
-  <p><em>Oppdater tabellen med klubbens faktiske tider.</em></p>
+<div style="background:#fff3cd; color:#664d03; text-align:center; padding:0.7rem 1rem; font-size:0.9rem; border-bottom:1px solid #ffe69c;">
+  Dette er en side under utvikling. Besøk <a href="https://skedsmo-svommeklubb.no/" style="color:#664d03; font-weight:600;">skedsmo-svommeklubb.no</a> for klubbens offisielle nettside.
+</div>
 
-  <h2>Praktisk informasjon</h2>
-  <ul>
-    <li>Møt opp i god tid før treningsstart, gjerne 10 minutter.</li>
-    <li>Husk badetøy, håndkle, badehette og svømmebriller.</li>
-    <li>Meld fra til trener ved sykdom eller fravær over lengre tid.</li>
-  </ul>
+<header>
+  <div class="nav">
+    <a href="#forside" class="brand">
+      <span class="brand-mark">🏊</span>
+      Skedsmo svømmeklubb
+    </a>
+    <nav>
+      <ul>
+        <li><a href="#om-klubben">Om klubben</a></li>
+        <li><a href="#trening">Trening</a></li>
+        <li><a href="#praktisk">Praktisk info</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-  <h2>Kontakt</h2>
-  <p>Har du spørsmål om trening, kontingent eller medlemskap? Ta kontakt med klubben via våre vanlige kontaktkanaler.</p>
+<div id="forside" class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Lillestrøm kommune</span>
+    <h1>Svømmeopplæring og konkurransesvømming for barn og ungdom</h1>
+    <p>Skedsmo svømmeklubb har gitt barn og unge i nærområdet et trygt sted å lære å svømme og utvikle seg som idrettsutøvere siden 1959.</p>
+    <div class="cta-row">
+      <a href="#kontakt" class="btn btn-primary">Ta kontakt</a>
+      <a href="#trening" class="btn btn-ghost">Se treningstider</a>
+    </div>
+  </div>
+</div>
 
-  <footer>
-    <p>S svømmeklubb</p>
-  </footer>
+<section id="om-klubben">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Om klubben</h2>
+      <p>Fra én manns idé til en klubb med over 60 år og flere norgesmestere bak seg.</p>
+    </div>
+    <div class="about-grid">
+      <div class="card">
+        <p>Klubben startet med Thor Müllers visjon i 1959 om at alle barn skulle lære å svømme, med trening i Meieridammen på Skedsmokorset. Etter hvert bygde kommunen svømmehaller ved flere skoler, og det vokste fram tre egne klubber.</p>
+        <p>24. september 1973 slo Skedsmokorset Svømmeklubb, Strømmen I.F.s svømmegruppe og Lillestrøm Svømmeklubb seg sammen til Skedsmo Svømmeklubb – kort tid etter at 25-meterbassenget på Volla skole sto klart i 1972 og gjorde det mulig med satsing på toppnivå.</p>
+        <p>Klubben har arrangert norgesmesterskap i 1974, 1978 og 1986, og har gjennom årene tatt 10 norgesmesterskap, 12 sølv- og 6 bronsemedaljer på langbane. Etter en krevende periode på 1990-tallet med stengte anlegg, bygde klubben seg gradvis opp igjen fra 2001 og driver aktivt den dag i dag.</p>
+      </div>
+      <ul class="timeline">
+        <li><span class="year">1959</span>Klubben starter opp på Skedsmokorset, trening i Meieridammen.</li>
+        <li><span class="year">1972</span>25-meterbasseng står klart på Volla skole.</li>
+        <li><span class="year">1973</span>Tre klubber slår seg sammen til Skedsmo Svømmeklubb.</li>
+        <li><span class="year">1974–86</span>Klubben arrangerer tre norgesmesterskap.</li>
+        <li><span class="year">2001</span>Ny oppbygging etter en krevende periode.</li>
+        <li><span class="year">I dag</span>Aktiv opplærings- og konkurranseklubb i Lillestrøm kommune.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="trening" style="background:var(--paper); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Trening</h2>
+      <p>Vi trener på fire anlegg i kommunen.</p>
+    </div>
+    <div class="place-grid" style="margin-bottom: 2.5rem;">
+      <div class="place-card"><span class="icon">📍</span><strong>ASAK – Leirsund</strong></div>
+      <div class="place-card"><span class="icon">📍</span><strong>Volla – Lillestrøm</strong></div>
+      <div class="place-card"><span class="icon">📍</span><strong>Sten Tærud</strong></div>
+      <div class="place-card"><span class="icon">📍</span><strong>Åsenhagen – Skedsmokorset</strong></div>
+    </div>
+    <div class="card">
+      <table>
+        <tr>
+          <th>Gruppe</th>
+          <th>Dag</th>
+          <th>Tid</th>
+        </tr>
+        <tr>
+          <td>Nybegynnere</td>
+          <td>Mandag</td>
+          <td>17:00 – 18:00</td>
+        </tr>
+        <tr>
+          <td>Videregående</td>
+          <td>Onsdag</td>
+          <td>18:00 – 19:00</td>
+        </tr>
+        <tr>
+          <td>Konkurranse</td>
+          <td>Tirsdag og torsdag</td>
+          <td>19:00 – 20:00</td>
+        </tr>
+      </table>
+      <p class="note">Oppdater tabellen med klubbens faktiske tider og hvilket anlegg hver gruppe trener på.</p>
+    </div>
+  </div>
+</section>
+
+<section id="praktisk">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Praktisk informasjon</h2>
+      <p>Godt å vite før trening.</p>
+    </div>
+    <div class="info-grid">
+      <div class="card">
+        <h3>Møt opp i god tid</h3>
+        <p>Vær klar ved bassengkanten senest 10 minutter før treningsstart.</p>
+      </div>
+      <div class="card">
+        <h3>Utstyr</h3>
+        <p>Badetøy, håndkle, badehette og svømmebriller. Klubben har badehette til salgs ved behov.</p>
+      </div>
+      <div class="card">
+        <h3>Fravær</h3>
+        <p>Meld fra til trener ved sykdom eller fravær over lengre tid.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kontakt">
+  <div class="wrap">
+    <div class="contact">
+      <div>
+        <h2>Kontakt oss</h2>
+        <p>Spørsmål om trening, kontingent eller medlemskap? Vi svarer gjerne.</p>
+        <p><a href="mailto:opplaring@skedsmo-svommeklubb.net" style="color:white; font-weight:600;">opplaring@skedsmo-svommeklubb.net</a></p>
+        <p style="font-size:0.85rem;">Org.nr. 984 825 439</p>
+      </div>
+      <div class="social-row">
+        <a href="https://www.instagram.com/skedsmo.sk/" aria-label="Instagram" target="_blank" rel="noopener">IG</a>
+        <a href="https://facebook.com/Skedsmosk" aria-label="Facebook" target="_blank" rel="noopener">FB</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Skedsmo svømmeklubb</p>
+</footer>
+
 </body>
 </html>
